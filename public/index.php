@@ -66,6 +66,8 @@ $router->map('GET|POST', '/', 'MainController#home', 'main-home');
 
 $router->map('GET|POST', '/api/insert', 'MainController#apiInsert', 'api-insert');
 
+$router->map('GET', '/scrap', 'MainController#scrap', 'api-scrap');
+
 
 
 /* -------------

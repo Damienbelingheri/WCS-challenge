@@ -17,7 +17,8 @@ class CoreController {
         $acl = [
             //n'importe qui doit pouvoir accéder à la home, même si pas connecté ! 
             'main-home' => 'anonymous',
-            'api-insert' => 'anonymous'
+            'api-insert' => 'anonymous',
+            'api-scrap'=> 'anonymous'
             //'user-logout' => ['admin', 'catalog-manager'],
         ];
 
@@ -97,6 +98,7 @@ class CoreController {
         }
     }
 
+    //https://gist.github.com/james2doyle/33794328675a6c88edd6
     protected function json_response($code = 200, $message = null)
 {
     // clear the old headers

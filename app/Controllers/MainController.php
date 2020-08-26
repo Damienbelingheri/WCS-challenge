@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Argonaute;
+use App\Utils\Scrapping;
 use Respect\Validation\Validator as v;
 use Respect\Validation\Rules;
 
@@ -10,6 +11,15 @@ use Respect\Validation\Rules;
 // use App\Models\Category;
 
 class MainController extends CoreController {
+
+   
+   
+    public function scrap()
+    {
+        
+        Scrapping::GetTableWiki();
+    }
+
 
     /**
      * Méthode s'occupant de la page d'accueil
@@ -58,7 +68,7 @@ class MainController extends CoreController {
 
         
         $data = json_decode(file_get_contents("php://input"));
-        
+
         if(isset($data->name)){
             if(!empty($data->name)){
                
