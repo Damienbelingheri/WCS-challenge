@@ -10,15 +10,16 @@ use Respect\Validation\Rules;
 // Si j'ai besoin du Model Category
 // use App\Models\Category;
 
-class MainController extends CoreController {
+class MainController extends CoreController
+{
 
-   
-   
-    public function scrap()
-    {
-        
-        Scrapping::GetTableWiki();
-    }
+
+    //    // Pour activer la méthode de scrapping
+    //     public function scrap()
+    //     {
+
+    //         Scrapping::GetTableWiki();
+    //     }
 
 
     /**
@@ -28,28 +29,28 @@ class MainController extends CoreController {
      */
     public function home()
     {
-         $argonautes = Argonaute::findAll();
-         
-         if (isset($_POST['submit'])){
+        $argonautes = Argonaute::findAll();
+
+        if (isset($_POST['submit'])) {
             $argonaute = new Argonaute;
             $name = strip_tags(filter_input(INPUT_POST, 'name'));
 
             $validator = v::alnum()->notBlank()->length(1, 20);
             $argonaute->setName($name);
-            if ($validator->validate($name) === true){               
-                if($argonaute->insert()){
-                    
+            if ($validator->validate($name) === true) {
+                if ($argonaute->insert()) {
+
                     $this->redirectToRoute("main-home");
                 }
             } else {
                 //...
             }
-         }
+        }
 
-        $this->show('main/home',['argonautes' => $argonautes]);
+        $this->show('main/home', ['argonautes' => $argonautes]);
     }
 
-     /**
+    /**
      * Méthod for api 
      * @Route = /api/sub_category
      *
@@ -66,12 +67,12 @@ class MainController extends CoreController {
     public function apiInsert()
     {
 
-        
+
         $data = json_decode(file_get_contents("php://input"));
 
-        if(isset($data->name)){
-            if(!empty($data->name)){
-               
+        if (isset($data->name)) {
+            if (!empty($data->name)) {
+
                 $argonaute = new Argonaute;
                 $validator = v::alnum()->notBlank()->length(1, 20);
 
@@ -80,25 +81,30 @@ class MainController extends CoreController {
 
                 $validator = new Rules\AllOf(
                     new Rules\Alnum(),
-                    new Rules\NoWhitespace(),
                     new Rules\NotBlank(),
-                    new Rules\Length(1, 15)
+                    new Rules\Length(1, 30)
                 );
 
-                if ($validator->validate($name) === true){               
-                    if($argonaute->insert()){
+                $code = [];
+                if ($validator->validate($name) === true) {
+                    if ($argonaute->insert()) {
 
-                        echo  $this->json_response(200, 'working');
+                        $msg['msg'] = ('working') ;
+                        $code = 200;
                     }
                 } else {
-                        echo $this->json_response(400, 'pas bon');
+                    $msg['msg'] = ('Il y\'a un problème !');
+                    $code = 400;
                 }
+            } else {
+                $msg['msg'] = ('C\'est vide');
+                $code = 400;
+            }
+        }
 
-            } 
-             else {
-                       echo $this->json_response(400, 'pas bon !');
-                }
-        } 
-
+        echo $this->json_response($code, array(
+            'msg' =>  [$msg],
+            'data' => [$data]
+            ));
     }
 }
