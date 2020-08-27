@@ -104,7 +104,7 @@ class MainController extends CoreController
 
         echo $this->json_response($code, array(
             'msg' =>  [$msg],
-            'data' => [$data]
+            'data' => $data
             ));
     }
 }
