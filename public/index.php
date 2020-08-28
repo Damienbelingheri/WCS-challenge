@@ -1,8 +1,8 @@
 <?php
 // SET HEADER
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: Allow ");
 header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: GET,POST");
 header("Content-Type: *");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 // POINT D'ENTRÉE UNIQUE : 
@@ -64,7 +64,16 @@ foreach($routes as $route){
 
 $router->map('GET|POST', '/', 'MainController#home', 'main-home');
 
-$router->map('GET|POST', '/api/insert', 'MainController#apiInsert', 'api-insert');
+
+
+/* API  */
+
+$router->map('GET', '/api/v1/argonautes', 'ApiController#Read', 'api-read');
+
+$router->map('GET|POST', '/api/v1/insert', 'ApiControllerr#Insert', 'api-insert');
+
+
+
 
 $router->map('GET', '/scrap', 'MainController#scrap', 'api-scrap');
 

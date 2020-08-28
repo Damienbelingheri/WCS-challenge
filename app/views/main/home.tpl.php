@@ -12,9 +12,7 @@
   <!-- Member list -->
   <h2>Membres de l'équipage</h2>">
     <ul class="member-list">
-      <?php foreach ($argonautes as $argonaute) : ?>
-        <li class="member-item"><?= $argonaute->getName() ?> </li>
-      <?php endforeach ?>
+        <li class="member-item"?>opi</li>
     </ul>
 </main>
 

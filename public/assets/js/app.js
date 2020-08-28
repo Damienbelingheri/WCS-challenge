@@ -3,11 +3,6 @@ let app = {
 
 
     //on définit ici nos propriétés réutilisables dans notre code
-    fetchOptions: {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-    },
 
     baseUrl: "http://127.0.0.1:8000/api/",
 
@@ -21,6 +16,8 @@ let app = {
 
         //met en place toutes nos mises sous écoute
         app.listenForEvents();
+
+        app.loadArgonautes();
     },
 
     listenForEvents: function () {
@@ -29,6 +26,54 @@ let app = {
     },
 
 
+
+
+
+    loadArgonautes: function () {
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let fetchOptions = {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            // On ajoute les headers dans les options
+            headers: myHeaders,
+            // On ajoute les données, encodée en JSON, dans le corps de la requête
+        };
+
+
+        fetch(app.baseUrl + "v1/argonautes", fetchOptions)
+            .then(
+                function (response) {
+                    return response.json();
+                }
+            )
+            .then(
+                function (name) {
+
+                    console.log(name);
+                    let text = name.message.data.name;
+                    let ul = document.querySelector('.member-list')
+
+                    let newLi = document.createElement('li');
+                    debugger
+                    console.log(name.message);
+
+                    newLi.innerHTML = text
+                    newLi.className = 'member-item'
+
+                    ul.appendChild(newLi);
+
+
+                    //on demande à charger nos tâches que lorsqu'on a reçu nos catégories ! 
+                    app.loadTasks();
+
+                    //cette fonction sera appelée quand les résultats seront arrivés
+                    app.updateCategoriesSelects(categories);
+                }
+            );
+    },
 
 
 
@@ -60,9 +105,8 @@ let app = {
             body: JSON.stringify(data)
         };
 
-        console.log(app.fetchOptions);
 
-        fetch(app.baseUrl + 'insert', fetchOptions)
+        fetch(app.baseUrl + 'v1/insert', fetchOptions)
             .then(
                 function (response) {
 
@@ -70,7 +114,7 @@ let app = {
 
                     if (response.status == 200) {
                         alert('Nom ajouté !');
-                       
+
                         return response.json()
                     } else {
                         alert('L\'ajout du nom a échoué');
@@ -97,6 +141,9 @@ let app = {
                     app.listenForEvents();
                 })
     },
+
+
+
 
 }
 app.init();
