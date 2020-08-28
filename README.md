@@ -1,4 +1,4 @@
-# oFramework 
+# WCS-challenge
 
 
 - clone le dépôt 
@@ -8,4 +8,5 @@
     - pour ça il faut entrer la commande `git remote remove origin `
     - puis `git remote add origin <lien vers le repos>`
 
-# WCS-challenge
+
+
