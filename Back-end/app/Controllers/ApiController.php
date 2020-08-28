@@ -2,72 +2,47 @@
 
 namespace App\Controllers;
 
+
 use App\Models\Argonaute;
-use App\Utils\Scrapping;
 use Respect\Validation\Validator as v;
 use Respect\Validation\Rules;
 
-// Si j'ai besoin du Model Category
-// use App\Models\Category;
-
-class MainController extends CoreController
+class ApiController extends CoreController
 {
 
 
-    //    // Pour activer la méthode de scrapping
-    //     public function scrap()
-    //     {
-
-    //         Scrapping::GetTableWiki();
-    //     }
-
-
-    /**
-     * Méthode s'occupant de la page d'accueil
-     *
-     * @return void
-     */
-    public function home()
-    {
-        $argonautes = Argonaute::findAll();
-
-        if (isset($_POST['submit'])) {
-            $argonaute = new Argonaute;
-            $name = strip_tags(filter_input(INPUT_POST, 'name'));
-
-            $validator = v::alnum()->notBlank()->length(1, 20);
-            $argonaute->setName($name);
-            if ($validator->validate($name) === true) {
-                if ($argonaute->insert()) {
-
-                    $this->redirectToRoute("main-home");
-                }
-            } else {
-                //...
-            }
-        }
-
-        $this->show('main/home', ['argonautes' => $argonautes]);
-    }
-
     /**
      * Méthod for api 
-     * @Route = /api/sub_category
+     * @Route = /api/
      *
      * @return void
      */
-    public function apiList()
+    public function read()
     {
 
-        $data = Argonaute::findAll();
-        header('Content-Type: application/json');
-        $myJson = json_encode($data);
-        echo $myJson;
+
+        $argonautes  = Argonaute::findAll();
+        //dd($argonautes);
+        $code=200;
+       
+       
+        foreach ($argonautes as $argonaute){
+
+            $data[]= $argonaute->getName();
+        }
+        //dd($data);
+
+
+        echo $this->json_response($code, array(
+            'data' => $data
+
+            ));
     }
-    public function apiInsert()
+
+
+
+    public function insert()
     {
-
-
         $data = json_decode(file_get_contents("php://input"));
 
         if (isset($data->name)) {
@@ -107,4 +82,6 @@ class MainController extends CoreController
             'data' => $data
             ));
     }
+
+
 }

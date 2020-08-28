@@ -17,6 +17,7 @@ class CoreController {
         $acl = [
             //n'importe qui doit pouvoir accéder à la home, même si pas connecté ! 
             'main-home' => 'anonymous',
+            'api-read' =>'anonymous',
             'api-insert' => 'anonymous',
             'api-scrap'=> 'anonymous'
             //'user-logout' => ['admin', 'catalog-manager'],

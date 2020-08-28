@@ -10,11 +10,8 @@
   </form>
 
   <!-- Member list -->
-  <h2>Membres de l'équipage</h2>">
+  <h2>Membres de l'équipage</h2>
     <ul class="member-list">
-      <?php foreach ($argonautes as $argonaute) : ?>
-        <li class="member-item"><?= $argonaute->getName() ?> </li>
-      <?php endforeach ?>
     </ul>
 </main>
 
