@@ -11,7 +11,7 @@ use App\Utils\Scrapping;
 class MainController extends CoreController
 {
 
-
+   
     //    // Pour activer le scrapping
 
     //     public function scrap()
@@ -28,7 +28,6 @@ class MainController extends CoreController
      */
     public function home()
     {
-
         //REMPLACER PAR API
 
         // $argonautes = Argonaute::findAll();

@@ -17,19 +17,31 @@ class ApiController extends CoreController
      *
      * @return void
      */
-    public function Read()
+    public function read()
     {
 
-        $data = Argonaute::find(106);
+
+        $argonautes  = Argonaute::findAll();
+        //dd($argonautes);
+        $code=200;
+       
+       
+        foreach ($argonautes as $argonaute){
+
+            $data[]= $argonaute->getName();
+        }
         //dd($data);
-        header('Content-Type: application/json');
-        $myJson = json_encode($data);
-        echo $myJson;
+
+
+        echo $this->json_response($code, array(
+            'data' => $data
+
+            ));
     }
 
 
 
-    public function apiInsert()
+    public function insert()
     {
         $data = json_decode(file_get_contents("php://input"));
 

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Utils\Database;
-use PDO;
+
 
 class Argonaute extends CoreModel
 {
@@ -13,7 +13,7 @@ class Argonaute extends CoreModel
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     public  static function getTableName()
     {
@@ -51,6 +51,7 @@ class Argonaute extends CoreModel
         // Si on arrive ici, c'est que quelque chose n'a pas bien fonctionné => FAUX
         return false;
     }
+
 
     /**
      * Get the value of name

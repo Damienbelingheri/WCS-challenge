@@ -1,10 +1,17 @@
 <?php
-// SET HEADER
-header("Access-Control-Allow-Origin: Allow ");
-header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: GET,POST");
-header("Content-Type: *");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+// // SET HEADER
+// header('Access-Control-Allow-Origin: http://127.0.0.1:8001 ');
+// header('Access-Control-Allow-Credentials: true ');
+// header("Access-Control-Allow-Headers:Access-Control-Allow-Headers, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+// header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+// header("Allow: GET, POST, OPTIONS, PUT, DELETE");
+
+// $method = $_SERVER['REQUEST_METHOD'];
+// if ($method == "OPTIONS") {
+//     die();
+// }
+
 // POINT D'ENTRÉE UNIQUE : 
 // FrontController
 
@@ -14,8 +21,6 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 require_once '../vendor/autoload.php';
 
 //activer les sessions ! 
-session_start();
-
 
 
 /* ------------
@@ -40,6 +45,8 @@ else {
     // On donne une valeur par défaut à $_SERVER['BASE_URI'] car c'est utilisé dans le CoreController
     $_SERVER['BASE_URI'] = '';
 }
+
+
 
 // On doit déclarer toutes les "routes" à AltoRouter, afin qu'il puisse nous donner LA "route" correspondante à l'URL courante
 // On appelle cela "mapper" les routes
@@ -68,9 +75,9 @@ $router->map('GET|POST', '/', 'MainController#home', 'main-home');
 
 /* API  */
 
-$router->map('GET', '/api/v1/argonautes', 'ApiController#Read', 'api-read');
+$router->map('GET', '/api/v1/argonautes', 'ApiController#read', 'api-read');
 
-$router->map('GET|POST', '/api/v1/insert', 'ApiControllerr#Insert', 'api-insert');
+$router->map('GET|POST', '/api/v1/insert', 'ApiController#insert', 'api-insert');
 
 
 

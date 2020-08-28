@@ -10,9 +10,8 @@
   </form>
 
   <!-- Member list -->
-  <h2>Membres de l'équipage</h2>">
+  <h2>Membres de l'équipage</h2>
     <ul class="member-list">
-        <li class="member-item"?>opi</li>
     </ul>
 </main>
 

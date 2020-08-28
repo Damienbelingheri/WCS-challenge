@@ -1,8 +1,8 @@
 RewriteEngine On
-
 # dynamically setup base URI
 RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
 RewriteRule ^(.*) - [E=BASE_URI:%1]
+
 
 # redirect every request to index.php
 # and give the relative URL in "_url" GET param
