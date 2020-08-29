@@ -9,6 +9,7 @@
 
     <!-- We can still have our own CSS file -->
     <link rel="stylesheet" href="<?= $assetsBaseUri ?>/css/style.css">
+    
 </head>
 
 <body>

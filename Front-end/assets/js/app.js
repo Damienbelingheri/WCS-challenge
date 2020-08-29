@@ -5,7 +5,7 @@ let app = {
     //on définit ici nos propriétés réutilisables dans notre code
 
     //RUN "symfony server:start --no-tls"
-    baseUrl: "http://127.0.0.1:8000/api/",
+    baseUrl: "https://127.0.0.1:8000/api/",
 
 
 
